@@ -4,24 +4,14 @@
 #define MOON_LED_LEVEL LED_LEVEL
 #define ML_SAFE_RANGE SAFE_RANGE
 
-// Left-hand home row mods
-#define HOME_A LGUI_T(KC_A)
-#define HOME_S LALT_T(KC_S)
-#define HOME_D LSFT_T(KC_D)
-#define HOME_F LCTL_T(KC_F)
-
-// Right-hand home row mods
-#define HOME_J RCTL_T(KC_J)
-#define HOME_K RSFT_T(KC_K)
-#define HOME_L LALT_T(KC_L)
-#define HOME_SCLN RGUI_T(KC_SCLN)
-
 enum custom_keycodes {
   RGB_SLD = ML_SAFE_RANGE,
   ST_MACRO_0,
   ST_MACRO_1,
   ST_MACRO_2,
 };
+
+
 
 enum tap_dance_codes {
   DANCE_0,
@@ -35,7 +25,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
     KC_ESCAPE,      KC_1,           KC_2,           KC_3,           KC_4,           KC_5,                                           KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           KC_BSPC,
     KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,                                           KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_MINUS,
-    KC_LEFT_GUI,    LALT_T(KC_A)           LSFT_T(KC_S),           LCT_T(KC_D),           LT(2,KC_F),     LT(1,KC_G),                                     KC_H,           RCTL_T(KC_J),           RSFT_T(KC_K),           LALT_T(KC_L),            KC_SCLN,        KC_QUOTE,
+    KC_LEFT_GUI,    LALT_T(KC_A),           LSFT_T(KC_S),           LCTL_T(KC_D),           LT(2,KC_F),     LT(1,KC_G),                                     KC_H,           RCTL_T(KC_J),           RSFT_T(KC_K),           LALT_T(KC_L),            KC_SCLN,        KC_QUOTE,
     MO(3),          MT(MOD_LALT, KC_Z),MT(MOD_LALT, KC_X),KC_C,           KC_V,           MT(MOD_LCTL, KC_B),                                MT(MOD_RSFT, KC_N),KC_M,           KC_COMMA,       KC_DOT,         MT(MOD_RALT, KC_SLASH),KC_RIGHT_CTRL,
                                                     KC_RIGHT_SHIFT, LT(1,KC_ENTER),                                 KC_SPACE,       MO(2)
   ),
@@ -170,6 +160,8 @@ bool rgb_matrix_indicators_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (!process_achordion(keycode, record)) { return false; }
+
   switch (keycode) {
     case ST_MACRO_0:
     if (record->event.pressed) {
@@ -196,6 +188,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
+void matrix_scan_user(void) {
+  achordion_task();
+}
 
 typedef struct {
     bool is_press_action;
