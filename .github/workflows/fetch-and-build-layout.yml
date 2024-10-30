@@ -1,4 +1,4 @@
-name: Fetch and build layout
+f-hname: Fetch and build layout
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
       layout_id:
         description: "Layout id available in URL https://configure.zsa.io/voyager/layouts/[ID_IS_HERE]/latest"
         required: true
-        default: "g7jjw"
+        default: "YV4Oa"
       layout_geometry:
         description: "voyager|moonlander|ergodox_ez"
         required: true
@@ -17,8 +17,7 @@ permissions:
 
 jobs:
   fetch-and-build-layout:
-    runs-on: ubuntu-latest
-
+    runs-on: self-hosted
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
