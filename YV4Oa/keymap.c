@@ -11,8 +11,6 @@ enum custom_keycodes {
   ST_MACRO_2,
 };
 
-
-
 enum tap_dance_codes {
   DANCE_0,
   DANCE_1,
@@ -27,7 +25,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,                                           KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_MINUS,
     KC_LEFT_GUI,    LALT_T(KC_A),           LSFT_T(KC_S),           LCTL_T(KC_D),           LT(2,KC_F),     LT(1,KC_G),                                     KC_H,           RCTL_T(KC_J),           RSFT_T(KC_K),           LALT_T(KC_L),            KC_SCLN,        KC_QUOTE,
     MO(3),          MT(MOD_LALT, KC_Z),MT(MOD_LALT, KC_X),KC_C,           KC_V,           MT(MOD_LCTL, KC_B),                                MT(MOD_RSFT, KC_N),KC_M,           KC_COMMA,       KC_DOT,         MT(MOD_RALT, KC_SLASH),KC_RIGHT_CTRL,
-                                                    KC_RIGHT_SHIFT, LT(1,KC_ENTER),                                 KC_SPACE,       MO(2)
+                                                    KC_LEFT_SHIFT, LT(1,KC_ENTER),                                 KC_SPACE,       MO(2)
   ),
   [1] = LAYOUT_voyager(
     KC_AUDIO_VOL_UP,KC_AUDIO_MUTE,  KC_MEDIA_PLAY_PAUSE,KC_MEDIA_PREV_TRACK,KC_MEDIA_NEXT_TRACK,QK_LLCK,                                        KC_PAGE_UP,     KC_HOME,        KC_NO,          KC_INSERT,      KC_DELETE,      KC_TRANSPARENT,
@@ -43,13 +41,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          LCTL(LSFT(KC_B)),                                KC_LBRC,        KC_PIPE,        KC_RBRC,        KC_NO,          KC_BSLS,        KC_NO,
                                                     KC_TRANSPARENT, KC_LEFT_CTRL,                                   KC_LEFT_ALT,    KC_TRANSPARENT
   ),
+
+
   [3] = LAYOUT_voyager(
     LGUI(LSFT(KC_F23)),RGB_TOG,        TOGGLE_LAYER_COLOR,RGB_MODE_FORWARD,RGB_SLD,        RGB_VAD,                                        ST_MACRO_0,     ST_MACRO_1,     ST_MACRO_2,     KC_NO,          LSFT(KC_INSERT),LCTL(LSFT(KC_DELETE)),
     KC_TRANSPARENT, LCTL(KC_Q),     LCTL(KC_W),     LCTL(KC_E),     LCTL(KC_R),     RGB_VAI,                                        LALT(LCTL(KC_UP)),KC_NO,          KC_NO,          KC_NO,          TD(DANCE_4),    KC_NO,
     QK_BOOT,        LCTL(KC_A),     LCTL(KC_S),     LCTL(KC_D),     KC_TRANSPARENT, KC_TRANSPARENT,                                 LALT(LCTL(KC_DOWN)),KC_NO,          KC_NO,          LALT(KC_BSLS),  LALT(KC_RBRC),  LCTL(KC_RIGHT),
-    KC_ESCAPE,      LCTL(KC_Z),     LCTL(KC_X),     LCTL(KC_C),     LCTL(KC_V),     LCTL(KC_B),                                     LCTL(KC_N),     LCTL(LSFT(KC_TAB)),LCTL(KC_TAB),   KC_NO,          KC_NO,          KC_NO,
+    KC_ESCAPE,      LCTL(KC_Z),     LCTL(KC_X),     LCTL(KC_C),     LCTL(KC_V),     LCTL(KC_B),                                     LCTL(KC_N),     LCTL(LSFT(KC_TAB)),LCTL(KC_TAB),   KC_NO,          KC_NO,          MEH(KC_I),
                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 LCTL(LSFT(KC_ENTER)),KC_TRANSPARENT
   ),
+
+
   [4] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_NO,          KC_HOME,        KC_UP,          KC_END,         KC_PAGE_UP,     KC_TRANSPARENT,
@@ -100,16 +102,75 @@ void keyboard_post_init_user(void) {
   rgb_matrix_enable();
 }
 
+#define RGB_NONE    {0,0,0}
+// #define RGB_RED     {255,0,0}
+// #define RGB_BLUE    {0,0,255}
+// #define RGB_GREEN   {0,255,0}
+#define RGB_LBLUE   {54,213,255}
+// #define RGB_PURPLE  {255,0,255}
+#define RGB_LPURPLE {171,142,200}
+#define RGB_MEDIA   {210,218,204}
+
 const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
-    [0] = { {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {171,142,200}, {171,142,200}, {171,142,200}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {239,218,204}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {239,218,204} },
+    [0] = { RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_LPURPLE, RGB_LPURPLE,
+            RGB_LPURPLE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            RGB_NONE, RGB_LPURPLE,
 
-    [1] = { {210,218,204}, {210,218,204}, {208,255,255}, {208,255,255}, {208,255,255}, {0,0,0}, {208,255,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {54,213,255}, {54,213,255}, {54,213,255}, {0,0,0}, {0,0,0}, {206,255,255}, {208,255,255}, {0,255,255}, {0,0,0}, {0,0,0}, {0,0,0}, {206,255,255}, {208,255,255}, {208,255,255}, {0,0,0}, {125,255,255}, {0,0,0}, {0,255,255}, {208,255,255}, {208,255,255}, {208,255,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {54,218,204}, {152,255,255}, {0,0,0}, {0,0,0} },
+            RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            RGB_NONE, RGB_LPURPLE },
 
-    [2] = { {0,0,0}, {84,218,204}, {84,218,204}, {84,218,204}, {84,218,204}, {84,218,204}, {0,0,0}, {0,0,0}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,0,0}, {0,255,255}, {0,255,255}, {0,255,255}, {0,0,0}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,0,0}, {0,0,0}, {0,0,0}, {84,218,204}, {84,218,204}, {84,218,204}, {84,218,204}, {84,218,204}, {84,218,204}, {0,0,0}, {0,0,0}, {0,0,0}, {0,255,255}, {0,0,0}, {84,218,204}, {0,0,0}, {0,255,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,255}, {0,0,0}, {0,255,255}, {0,0,255}, {0,0,0}, {0,0,0}, {0,0,0} },
+    [1] = { RGB_MEDIA, RGB_MEDIA, RGB_MEDIA, RGB_MEDIA, RGB_MEDIA, RGB_NONE,
+            RGB_MEDIA, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            RGB_NONE, RGB_NONE, RGB_NONE, RGB_LBLUE, RGB_LBLUE, RGB_LBLUE,
+            RGB_NONE, RGB_NONE,
 
-    [3] = { {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,255,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,255,255}, {54,213,255}, {91,218,204}, {0,0,0}, {54,213,255}, {54,213,255}, {171,142,200}, {0,0,0}, {0,0,0}, {0,0,0}, {54,213,255}, {0,0,0}, {171,142,200}, {0,0,0}, {0,0,0}, {54,213,255}, {54,213,255}, {54,213,255}, {0,0,0}, {91,218,204}, {91,218,204}, {0,0,0}, {0,0,0}, {0,0,0}, {171,218,204}, {0,0,0} },
+            {206,255,255}, {208,255,255}, {0,255,255}, RGB_NONE, RGB_NONE, RGB_NONE,
+            {206,255,255}, {208,255,255}, {208,255,255}, RGB_NONE, {125,255,255}, RGB_NONE,
+            {0,255,255}, {208,255,255}, {208,255,255}, {208,255,255}, RGB_NONE, RGB_NONE,
+            RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, {54,218,204}, {152,255,255},
+            RGB_NONE, RGB_NONE },
 
-    [4] = { {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,218,204}, {0,0,0}, {0,0,0}, {0,0,0}, {0,218,204}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,218,204}, {54,213,255}, {91,218,204}, {54,213,255}, {54,213,255}, {0,0,0}, {0,218,204}, {54,218,204}, {54,218,204}, {54,218,204}, {54,213,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0} },
+    [2] = { RGB_NONE, {84,218,204}, {84,218,204}, {84,218,204}, {84,218,204}, {84,218,204},
+            RGB_NONE, RGB_NONE, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255},
+            RGB_NONE, {0,255,255}, {0,255,255}, {0,255,255}, RGB_NONE, {0,255,255},
+            {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, RGB_NONE,
+            RGB_NONE, RGB_NONE,
+
+            {84,218,204}, {84,218,204}, {84,218,204}, {84,218,204}, {84,218,204}, {84,218,204},
+            RGB_NONE, RGB_NONE, RGB_NONE, {0,255,255}, RGB_NONE, {84,218,204},
+            RGB_NONE, {0,255,255}, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            RGB_NONE, {0,0,255}, RGB_NONE, {0,255,255}, {0,0,255}, RGB_NONE,
+            RGB_NONE, RGB_NONE },
+
+    [3] = { RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            {0,255,255}, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            RGB_NONE, RGB_NONE,
+
+            {0,255,255}, RGB_LBLUE, {91,218,204}, RGB_NONE, RGB_LBLUE, RGB_LBLUE,
+            RGB_LPURPLE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_LBLUE, RGB_NONE,
+            RGB_LPURPLE, RGB_NONE, RGB_NONE, RGB_LBLUE, RGB_LBLUE, RGB_LBLUE,
+            RGB_NONE, {91,218,204}, {91,218,204}, RGB_NONE, RGB_NONE, RGB_LBLUE,
+            {171,218,204}, RGB_NONE },
+
+    [4] = { RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            {0,218,204}, RGB_NONE, RGB_NONE, RGB_NONE, {0,218,204}, RGB_NONE,
+            RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            RGB_NONE, RGB_NONE,
+
+            RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            {0,218,204}, RGB_LBLUE, {91,218,204}, RGB_LBLUE, RGB_LBLUE, RGB_NONE,
+            {0,218,204}, {54,218,204}, {54,218,204}, {54,218,204}, RGB_LBLUE, RGB_NONE,
+            RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE, RGB_NONE,
+            RGB_NONE, RGB_NONE },
 
 };
 
@@ -402,3 +463,39 @@ tap_dance_action_t tap_dance_actions[] = {
         [DANCE_3] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_3, dance_3_finished, dance_3_reset),
         [DANCE_4] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_4, dance_4_finished, dance_4_reset),
 };
+
+
+/**
+ * Optional callback to customize which key chords are considered "held".
+ *
+ * In your keymap.c, define the callback
+ *
+ *     bool achordion_chord(uint16_t tap_hold_keycode,
+ *                          keyrecord_t* tap_hold_record,
+ *                          uint16_t other_keycode,
+ *                          keyrecord_t* other_record) {
+ *        // Conditions...
+ *     }
+ *
+ * This callback is called if while `tap_hold_keycode` is pressed,
+ * `other_keycode` is pressed. Return true if the tap-hold key should be
+ * considered held, or false to consider it tapped.
+ *
+ * @param tap_hold_keycode Keycode of the tap-hold key.
+ * @param tap_hold_record keyrecord_t from the tap-hold press event.
+ * @param other_keycode Keycode of the other key.
+ * @param other_record keyrecord_t from the other key's press event.
+ * @return True if the tap-hold key should be considered held.
+ */
+bool achordion_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
+                     uint16_t other_keycode, keyrecord_t* other_record)
+{
+    // IF keycode = KC_ENTER, then return true
+    if (tap_hold_keycode == LT(1,KC_ENTER) || tap_hold_keycode == KC_ENTER) {
+        return true;
+    }
+
+    // By default, use the BILATERAL_COMBINATIONS rule to consider the tap-hold key
+    // "held" only when it and the other key are on opposite hands.
+    return achordion_opposite_hands(tap_hold_record, other_record);
+}

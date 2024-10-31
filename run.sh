@@ -16,3 +16,5 @@ docker run -v ./qmk_firmware:/root --rm qmk /bin/sh -c "
             qmk setup zsa/qmk_firmware -b firmware24 -y
             make zsa/voyager:YV4Oa -j 10
           "
+
+cp qmk_firmware/zsa_voyager_YV4Oa.bin /mnt/d/
