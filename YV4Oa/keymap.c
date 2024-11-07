@@ -23,7 +23,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
     KC_ESCAPE,      KC_1,           KC_2,           KC_3,           KC_4,           KC_5,                                           KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           KC_BSPC,
     KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,                                           KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_MINUS,
-    KC_LEFT_GUI,    LALT_T(KC_A),           LSFT_T(KC_S),           LCTL_T(KC_D),           LT(2,KC_F),     LT(1,KC_G),                                     KC_H,           RCTL_T(KC_J),           RSFT_T(KC_K),           LALT_T(KC_L),            KC_SCLN,        KC_QUOTE,
+    KC_LEFT_GUI,    LALT_T(KC_A),           LCTL_T(KC_S),           KC_D,           LT(2,KC_F),     LT(1,KC_G),                                     KC_H,           KC_J,           KC_K,           RCTL_T(KC_L),   RALT_T(KC_SCLN),        KC_QUOTE,
     MO(3),          MT(MOD_LALT, KC_Z),MT(MOD_LALT, KC_X),KC_C,           KC_V,           MT(MOD_LCTL, KC_B),                                MT(MOD_RSFT, KC_N),KC_M,           KC_COMMA,       KC_DOT,         MT(MOD_RALT, KC_SLASH),KC_RIGHT_CTRL,
                                                     KC_LEFT_SHIFT, LT(1,KC_ENTER),                                 KC_SPACE,       MO(2)
   ),
@@ -41,7 +41,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          LCTL(LSFT(KC_B)),                                KC_LBRC,        KC_PIPE,        KC_RBRC,        KC_NO,          KC_BSLS,        KC_NO,
                                                     KC_TRANSPARENT, KC_LEFT_CTRL,                                   KC_LEFT_ALT,    KC_TRANSPARENT
   ),
-
 
   [3] = LAYOUT_voyager(
     LGUI(LSFT(KC_F23)),RGB_TOG,        TOGGLE_LAYER_COLOR,RGB_MODE_FORWARD,RGB_SLD,        RGB_VAD,                                        ST_MACRO_0,     ST_MACRO_1,     ST_MACRO_2,     KC_NO,          LSFT(KC_INSERT),LCTL(LSFT(KC_DELETE)),
